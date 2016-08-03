@@ -3,9 +3,6 @@
 namespace EdwinLuijten\Ekko;
 
 use EdwinLuijten\Ekko\Broadcasters\BroadcasterInterface;
-use EdwinLuijten\Ekko\Broadcasters\LogBroadcaster;
-use EdwinLuijten\Ekko\Broadcasters\PusherBroadcaster;
-use EdwinLuijten\Ekko\Broadcasters\RedisBroadcaster;
 
 class BroadcastManager
 {
@@ -15,21 +12,17 @@ class BroadcastManager
     protected $broadcasters = [];
 
     /**
-     * @var array
+     * @var BroadcasterInterface
      */
-    private $config;
+    private $default;
 
     /**
      * BroadcastManager constructor.
-     * @param array $config
+     * @param BroadcasterInterface $default
      */
-    public function __construct(array $config)
+    public function __construct(BroadcasterInterface $default)
     {
-        if (empty($config)) {
-            throw new \InvalidArgumentException('Config can not be empty.');
-        }
-        
-        $this->config = $config;
+        $this->default = $default;
     }
 
     /**
@@ -47,8 +40,6 @@ class BroadcastManager
      */
     public function broadcaster($broadcaster = null)
     {
-        $broadcaster = $broadcaster ?: $this->getDefaultBroadcaster();
-
         return $this->broadcasters[$broadcaster] = $this->get($broadcaster);
     }
 
@@ -58,82 +49,24 @@ class BroadcastManager
      */
     protected function get($broadcaster)
     {
-        return isset($this->broadcasters[$broadcaster]) ? $this->broadcasters[$broadcaster] : $this->resolve(
-            $broadcaster
-        );
-    }
-
-    /**
-     * @param string $broadcaster
-     * @return BroadcasterInterface
-     */
-    protected function resolve($broadcaster)
-    {
-        $config = $this->getConfig($broadcaster);
-
-        if (is_null($config)) {
+        if (is_null($broadcaster)) {
+            return $this->default;
+        }
+        
+        if (!isset($this->broadcasters[$broadcaster])) {
             throw new \InvalidArgumentException(sprintf('Broadcaster [%s] is not defined.', $broadcaster));
         }
 
-        $method = 'create' . ucfirst($config['driver']) . 'Broadcaster';
-
-        if (method_exists($this, $method)) {
-            return $this->{$method}($config);
-        } else {
-            throw new \InvalidArgumentException(sprintf('Broadcaster [%s] is not supported.', $broadcaster));
-        }
+        return $this->broadcasters[$broadcaster];
     }
 
     /**
-     * @param array $config
-     * @return BroadcasterInterface
+     * @param string $name
+     * @param BroadcasterInterface $broadcaster
      */
-    protected function createPusherBroadcaster(array $config)
+    public function add($name, BroadcasterInterface $broadcaster)
     {
-        return new PusherBroadcaster($config);
-    }
-
-    /**
-     * @param array $config
-     * @return BroadcasterInterface
-     */
-    protected function createRedisBroadcaster(array $config)
-    {
-        return new RedisBroadcaster($config);
-    }
-
-    /**
-     * @param array $config
-     * @return BroadcasterInterface
-     */
-    protected function createLogBroadcaster(array $config)
-    {
-        return new LogBroadcaster($config);
-    }
-
-    /**
-     * @param string $broadcaster
-     * @return array|null
-     */
-    protected function getConfig($broadcaster)
-    {
-        return isset($this->config[$broadcaster]) ? $this->config[$broadcaster] : null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDefaultBroadcaster()
-    {
-        return $this->config['default'];
-    }
-
-    /**
-     * @param $broadcaster
-     */
-    public function setDefaultBroadcaster($broadcaster)
-    {
-        $this->config['default'] = $broadcaster;
+        $this->broadcasters[$name] = $broadcaster;
     }
 
     /**
@@ -143,6 +76,6 @@ class BroadcastManager
      */
     public function __call($method, $arguments)
     {
-        return call_user_func_array([$this->broadcaster(), $method], $arguments);
+        return call_user_func_array([$this->default, $method], $arguments);
     }
 }

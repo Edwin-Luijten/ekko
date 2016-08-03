@@ -2,7 +2,6 @@
 
 namespace EdwinLuijten\Ekko\Broadcasters;
 
-use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 
 class LogBroadcaster implements BroadcasterInterface
@@ -14,12 +13,11 @@ class LogBroadcaster implements BroadcasterInterface
 
     /**
      * LogBroadcaster constructor.
-     * @param array $config
+     * @param LoggerInterface $logger
      */
-    public function __construct(array $config)
+    public function __construct(LoggerInterface $logger)
     {
-        $this->logger = new Logger($config['name']);
-        $this->configureHandlers($config['handlers']);
+        $this->logger = $logger;
     }
 
     /**
@@ -43,18 +41,5 @@ class LogBroadcaster implements BroadcasterInterface
                 $channels
             )
         );
-    }
-
-    /**
-     * @param $handlers
-     */
-    private function configureHandlers($handlers)
-    {
-        foreach ($handlers as $handler) {
-            $class           = new \ReflectionClass($handler['class']);
-            $handlerInstance = $class->newInstanceArgs($handler['arguments']);
-
-            $this->logger->pushHandler($handlerInstance);
-        }
     }
 }

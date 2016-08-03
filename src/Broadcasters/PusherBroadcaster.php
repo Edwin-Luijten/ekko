@@ -13,16 +13,11 @@ class PusherBroadcaster implements BroadcasterInterface
 
     /**
      * PusherBroadcaster constructor.
-     * @param array $config
+     * @param Pusher $pusher
      */
-    public function __construct(array $config)
+    public function __construct(Pusher $pusher)
     {
-        $this->pusher = new \Pusher(
-            $config['key'],
-            $config['secret'],
-            $config['app_id'],
-            isset($config['options']) ? $config['options'] : []
-        );
+        $this->pusher = $pusher;
     }
 
     /**
@@ -41,7 +36,7 @@ class PusherBroadcaster implements BroadcasterInterface
     /**
      * Get the Pusher instance.
      *
-     * @return \Pusher
+     * @return Pusher
      */
     public function getPusher()
     {

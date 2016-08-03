@@ -2,22 +2,22 @@
 
 namespace EdwinLuijten\Ekko\Broadcasters;
 
-use Predis\Client;
+use Predis\ClientInterface;
 
 class RedisBroadcaster implements BroadcasterInterface
 {
     /**
-     * @var Client
+     * @var ClientInterface
      */
     private $redis;
 
     /**
      * RedisBroadcaster constructor.
-     * @param array $config
+     * @param ClientInterface $redis
      */
-    public function __construct(array $config)
+    public function __construct(ClientInterface $redis)
     {
-        $this->redis = new Client($config['parameters'], $config['options']);
+        $this->redis = $redis;
     }
 
     /**
