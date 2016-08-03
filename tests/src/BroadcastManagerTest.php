@@ -13,29 +13,28 @@ class BroadcastManagerTest extends AbstractTest
 {
     public function testThatPusherBroadcasterImplementsInterface()
     {
-        $broadcaster = m::mock(PusherBroadcaster::class);
+        $broadcaster = m::mock(PusherBroadcaster::class, new LogBroadcaster($this->getLogger()));
 
         $this->assertInstanceOf(BroadcasterInterface::class, $broadcaster);
     }
 
     public function testThatLogBroadcasterImplementsInterface()
     {
-        $broadcaster = m::mock(LogBroadcaster::class);
+        $broadcaster = m::mock(LogBroadcaster::class, new LogBroadcaster($this->getLogger()));
 
         $this->assertInstanceOf(BroadcasterInterface::class, $broadcaster);
     }
 
     public function testThatRedisBroadcasterImplementsInterface()
     {
-        $broadcaster = m::mock(RedisBroadcaster::class);
+        $broadcaster = m::mock(RedisBroadcaster::class, new LogBroadcaster($this->getLogger()));
 
         $this->assertInstanceOf(BroadcasterInterface::class, $broadcaster);
     }
 
     public function testBroadcastManagerWithDefaultBroadcaster()
     {
-        $broadcaster = new BroadcastManager($this->config['broadcasters']);
-        $broadcaster->setDefaultBroadcaster($this->config['default']);
+        $broadcaster = new BroadcastManager(new LogBroadcaster($this->getLogger()));
         $connection = $broadcaster->connection();
 
         $this->assertInstanceOf(LogBroadcaster::class, $connection);
@@ -43,7 +42,8 @@ class BroadcastManagerTest extends AbstractTest
 
     public function testBroadcastManagerWithSpecifiedBroadcaster()
     {
-        $broadcaster = new BroadcastManager($this->config['broadcasters']);
+        $broadcaster = new BroadcastManager(new LogBroadcaster($this->getLogger()));
+        $broadcaster->add('logger', new LogBroadcaster($this->getLogger()));
         $connection  = $broadcaster->connection('logger');
 
         $this->assertInstanceOf(LogBroadcaster::class, $connection);
@@ -52,39 +52,16 @@ class BroadcastManagerTest extends AbstractTest
     /**
      * @expectedException \InvalidArgumentException
      **/
-    public function testBroadcastManagerWithEmptyConfig()
-    {
-        $broadcaster = new BroadcastManager([]);
-        $broadcaster->connection();
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     **/
     public function testBroadcastManagerWithUndefinedBroadcaster()
     {
-        $broadcaster = new BroadcastManager($this->config['broadcasters']);
+        $broadcaster = new BroadcastManager(new LogBroadcaster($this->getLogger()));
+        $broadcaster->add('logger', new LogBroadcaster($this->getLogger()));
         $broadcaster->connection('undefined');
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     **/
-    public function testBroadcastManagerWithUnsupportedBroadcaster()
-    {
-        $broadcaster = new BroadcastManager([
-            'mongo' => [
-                'driver' => 'mongo',
-            ]
-        ]);
-
-        $broadcaster->connection('mongo');
     }
 
     public function testCallMethodOnDefaultDriverTroughBroadcastManager()
     {
-        $broadcaster = new BroadcastManager($this->config['broadcasters']);
-        $broadcaster->setDefaultBroadcaster('logger');
+        $broadcaster = new BroadcastManager(new LogBroadcaster($this->getLogger()));
         $broadcaster->broadcast(
             [
                 'channel_1',
