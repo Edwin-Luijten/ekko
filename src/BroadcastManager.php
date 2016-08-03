@@ -70,6 +70,14 @@ class BroadcastManager
     }
 
     /**
+     * @return BroadcasterInterface
+     */
+    public function getDefaultBroadcaster()
+    {
+        return $this->default;
+    }
+
+    /**
      * @return array
      */
     public function getBroadcasters()

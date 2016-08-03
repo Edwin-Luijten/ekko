@@ -73,6 +73,14 @@ class BroadcastManagerTest extends AbstractTest
             ]);
     }
 
+    public function testGetDefaultBroadcaster()
+    {
+        $broadcaster = new BroadcastManager(new LogBroadcaster($this->getLogger()));
+        $default = $broadcaster->getDefaultBroadcaster();
+
+        $this->assertInstanceOf(LogBroadcaster::class, $default);
+    }
+
     public function testGetAllBroadcasters()
     {
         $broadcaster = new BroadcastManager(new LogBroadcaster($this->getLogger()));
