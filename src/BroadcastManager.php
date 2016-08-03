@@ -65,6 +65,12 @@ class BroadcastManager
      */
     public function getDefaultBroadcaster()
     {
+        if (!$this->default instanceof BroadcasterInterface) {
+            throw new \InvalidArgumentException(
+                sprintf('Default broadcaster not set or does not implement %s', BroadcasterInterface::class)
+            );
+        }
+
         return $this->default;
     }
 

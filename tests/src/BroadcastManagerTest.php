@@ -84,6 +84,15 @@ class BroadcastManagerTest extends AbstractTest
         $this->assertInstanceOf(LogBroadcaster::class, $default);
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     **/
+    public function testInvalidDefaultBroadcaster()
+    {
+        $broadcaster = new BroadcastManager();
+        $broadcaster->getDefaultBroadcaster();
+    }
+
     public function testGetAllBroadcasters()
     {
         $broadcaster = new BroadcastManager();
