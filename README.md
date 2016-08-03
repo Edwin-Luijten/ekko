@@ -7,7 +7,6 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/Edwin-Luijten/ekko.svg?style=flat-square)](https://scrutinizer-ci.com/g/Edwin-Luijten/ekko/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/edwin-luijten/ekko.svg?style=flat-square)](https://packagist.org/packages/edwin-luijten/ekko)
 
-
 ## Install
 
 Via Composer
