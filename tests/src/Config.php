@@ -13,9 +13,9 @@ class Config
             'broadcasters' => [
                 'pusher' => [
                     'driver' => 'pusher',
-                    'key'    => '',
-                    'secret' => '',
-                    'app_id' => '',
+                    'key'    => null,
+                    'secret' => null,
+                    'app_id' => null,
                 ],
                 'redis'  => [
                     'driver' => 'redis',
