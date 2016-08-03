@@ -52,7 +52,7 @@ class BroadcastManager
         if (is_null($broadcaster)) {
             return $this->default;
         }
-        
+
         if (!isset($this->broadcasters[$broadcaster])) {
             throw new \InvalidArgumentException(sprintf('Broadcaster [%s] is not defined.', $broadcaster));
         }
@@ -67,6 +67,14 @@ class BroadcastManager
     public function add($name, BroadcasterInterface $broadcaster)
     {
         $this->broadcasters[$name] = $broadcaster;
+    }
+
+    /**
+     * @return array
+     */
+    public function getBroadcasters()
+    {
+        return $this->broadcasters;
     }
 
     /**

@@ -72,4 +72,13 @@ class BroadcastManagerTest extends AbstractTest
                 'some' => 'payload',
             ]);
     }
+
+    public function testGetAllBroadcasters()
+    {
+        $broadcaster = new BroadcastManager(new LogBroadcaster($this->getLogger()));
+        $broadcaster->add('logger', new LogBroadcaster($this->getLogger()));
+        $broadcasters = $broadcaster->getBroadcasters();
+
+        $this->assertArrayHasKey('logger', $broadcasters);
+    }
 }
