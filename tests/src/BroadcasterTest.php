@@ -14,7 +14,7 @@ class BroadcasterTest extends AbstractTest
 
     public function testRedisBroadcaster()
     {
-        $broadcaster = new BroadcastManager(new LogBroadcaster($this->getLogger()));
+        $broadcaster = new BroadcastManager();
         $broadcaster->add('redis', new RedisBroadcaster(new Client()));
         $connection = $broadcaster->connection('redis');
 
@@ -23,7 +23,8 @@ class BroadcasterTest extends AbstractTest
 
     public function testRedisBroadcasterBroadcast()
     {
-        $broadcaster = new BroadcastManager(new RedisBroadcaster(new Client()));
+        $broadcaster = new BroadcastManager();
+        $broadcaster->setDefaultBroadcaster(new RedisBroadcaster(new Client()));
         $broadcaster->broadcast(
             [
                 'channel_1',
@@ -37,7 +38,7 @@ class BroadcasterTest extends AbstractTest
 
     public function testPusherBroadcaster()
     {
-        $broadcaster = new BroadcastManager(new LogBroadcaster($this->getLogger()));
+        $broadcaster = new BroadcastManager();
         $broadcaster->add('pusher', new PusherBroadcaster(
             new \Pusher(
                 $this->config['broadcasters']['pusher']['key'],
@@ -54,7 +55,8 @@ class BroadcasterTest extends AbstractTest
 
     public function testPusherBroadcasterGetClient()
     {
-        $broadcaster = new BroadcastManager(
+        $broadcaster = new BroadcastManager();
+        $broadcaster->setDefaultBroadcaster(
             new PusherBroadcaster(
                 new \Pusher(
                     $this->config['broadcasters']['pusher']['key'],
@@ -64,7 +66,6 @@ class BroadcasterTest extends AbstractTest
                 )
             )
         );
-
         $client = $broadcaster->getPusher();
 
         $this->assertInstanceOf(\Pusher::class, $client);
@@ -72,7 +73,8 @@ class BroadcasterTest extends AbstractTest
 
     public function testPusherBroadcasterBroadcast()
     {
-        $broadcaster = new BroadcastManager(
+        $broadcaster = new BroadcastManager();
+        $broadcaster->setDefaultBroadcaster(
             new PusherBroadcaster(
                 new \Pusher(
                     $this->config['broadcasters']['pusher']['key'],
@@ -82,7 +84,6 @@ class BroadcasterTest extends AbstractTest
                 )
             )
         );
-
         $broadcaster->broadcast(
             [
                 'channel_1',
@@ -96,7 +97,8 @@ class BroadcasterTest extends AbstractTest
 
     public function testLogBroadcaster()
     {
-        $broadcaster = new BroadcastManager(new LogBroadcaster($this->getLogger()));
+        $broadcaster = new BroadcastManager();
+        $broadcaster->setDefaultBroadcaster(new LogBroadcaster($this->getLogger()));
         $connection  = $broadcaster->connection();
 
         $this->assertInstanceOf(BroadcasterInterface::class, $connection);

@@ -17,15 +17,6 @@ class BroadcastManager
     private $default;
 
     /**
-     * BroadcastManager constructor.
-     * @param BroadcasterInterface $default
-     */
-    public function __construct(BroadcasterInterface $default)
-    {
-        $this->default = $default;
-    }
-
-    /**
      * @param string $broadcaster
      * @return BroadcasterInterface
      */
@@ -75,6 +66,14 @@ class BroadcastManager
     public function getDefaultBroadcaster()
     {
         return $this->default;
+    }
+
+    /**
+     * @param BroadcasterInterface $broadcaster
+     */
+    public function setDefaultBroadcaster(BroadcasterInterface $broadcaster)
+    {
+        $this->default = $broadcaster;
     }
 
     /**
