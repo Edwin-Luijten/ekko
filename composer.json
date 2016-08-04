@@ -14,7 +14,7 @@
         "php": ">=5.5.0",
         "pusher/pusher-php-server": "^2.4",
         "predis/predis": "^1.1",
-        "monolog/monolog": "1.18"
+        "monolog/monolog": "^1.20"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
@@ -32,8 +32,8 @@
         }
     },
 	"suggest": {
-        "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~2.0).",
-        "predis/predis": "Required to use the Redis broadcast driver (~1.0).",
-        "monolog/monolog":  "Required to use the Log broadcast driver (~1.18)."
+        "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (^2.4).",
+        "predis/predis": "Required to use the Redis broadcast driver (^1.1).",
+        "monolog/monolog":  "Required to use the Log broadcast driver (^1.20)."
     }
 }
