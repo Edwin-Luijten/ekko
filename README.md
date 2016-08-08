@@ -7,6 +7,11 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/Edwin-Luijten/ekko.svg?style=flat-square)](https://scrutinizer-ci.com/g/Edwin-Luijten/ekko/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/edwin-luijten/ekko.svg?style=flat-square)](https://packagist.org/packages/edwin-luijten/ekko)
 
+In many modern web applications, there is some kind of real-time user experience.
+When some data is updated on the server, a message is typically sent over a websocket connection or push notification to be handled by the client.  
+
+This library aims to help you with that, with support for Pusher and Redis out of the box.
+
 ## Install
 
 Via Composer
