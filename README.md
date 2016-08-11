@@ -17,7 +17,7 @@ This library aims to help you with that, with support for Pusher and Redis out o
 Via Composer
 
 ``` bash
-$ composer require edwin-luijten/ekko
+$ composer require edwin-luijten/ekko-broadcast
 ```
 
 ## Usage
