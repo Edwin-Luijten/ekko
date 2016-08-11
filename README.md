@@ -1,11 +1,11 @@
 # Ekko
 
-[![Latest Version](https://img.shields.io/github/release/edwin-luijten/ekko.svg?style=flat)](https://github.com/Edwin-Luijten/ekko/releases)
+[![Latest Version](https://img.shields.io/github/release/edwin-luijten/ekko-broadcast.svg?style=flat)](https://github.com/Edwin-Luijten/ekko-broadcast/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/Edwin-Luijten/ekko/master.svg?style=flat-square)](https://travis-ci.org/Edwin-Luijten/ekko)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/Edwin-Luijten/ekko.svg?style=flat-square)](https://scrutinizer-ci.com/g/Edwin-Luijten/ekko/?branch=master)
-[![Quality Score](https://img.shields.io/scrutinizer/g/Edwin-Luijten/ekko.svg?style=flat-square)](https://scrutinizer-ci.com/g/Edwin-Luijten/ekko/?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/edwin-luijten/ekko.svg?style=flat-square)](https://packagist.org/packages/edwin-luijten/ekko)
+[![Build Status](https://img.shields.io/travis/Edwin-Luijten/ekko-broadcast/master.svg?style=flat-square)](https://travis-ci.org/Edwin-Luijten/ekko-broadcast)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/Edwin-Luijten/ekko-broadcast.svg?style=flat-square)](https://scrutinizer-ci.com/g/Edwin-Luijten/ekko-broadcast/?branch=master)
+[![Quality Score](https://img.shields.io/scrutinizer/g/Edwin-Luijten/ekko-broadcast.svg?style=flat-square)](https://scrutinizer-ci.com/g/Edwin-Luijten/ekko-broadcast/?branch=master)
+[![Total Downloads](https://img.shields.io/packagist/dt/edwin-luijten/ekko-broadcast.svg?style=flat-square)](https://packagist.org/packages/edwin-luijten/ekko-broadcast)
 
 In many modern web applications, there is some kind of real-time user experience.
 When some data is updated on the server, a message is typically sent over a websocket connection or push notification to be handled by the client.  

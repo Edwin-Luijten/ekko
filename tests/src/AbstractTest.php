@@ -1,6 +1,6 @@
 <?php
 
-namespace EdwinLuijten\Ekko\Test;
+namespace EdwinLuijten\Ekko\Broadcast\Test;
 
 use Mockery as m;
 use Monolog\Logger;

@@ -1,6 +1,6 @@
 <?php
 
-namespace EdwinLuijten\Ekko\Broadcasters;
+namespace EdwinLuijten\Ekko\Broadcast\Broadcasters;
 
 use Psr\Log\LoggerInterface;
 

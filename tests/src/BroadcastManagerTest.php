@@ -1,12 +1,12 @@
 <?php
 
-namespace EdwinLuijten\Ekko\Test;
+namespace EdwinLuijten\Ekko\Broadcast\Test;
 
-use EdwinLuijten\Ekko\Broadcasters\BroadcasterInterface;
-use EdwinLuijten\Ekko\Broadcasters\LogBroadcaster;
-use EdwinLuijten\Ekko\Broadcasters\PusherBroadcaster;
-use EdwinLuijten\Ekko\Broadcasters\RedisBroadcaster;
-use EdwinLuijten\Ekko\BroadcastManager;
+use EdwinLuijten\Ekko\Broadcast\Broadcasters\BroadcasterInterface;
+use EdwinLuijten\Ekko\Broadcast\Broadcasters\LogBroadcaster;
+use EdwinLuijten\Ekko\Broadcast\Broadcasters\PusherBroadcaster;
+use EdwinLuijten\Ekko\Broadcast\Broadcasters\RedisBroadcaster;
+use EdwinLuijten\Ekko\Broadcast\BroadcastManager;
 use Mockery as m;
 
 class BroadcastManagerTest extends AbstractTest

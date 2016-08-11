@@ -1,5 +1,5 @@
 {
-    "name": "edwin-luijten/ekko",
+    "name": "edwin-luijten/ekko-broadcast",
     "description": "",
     "license": "MIT",
     "authors": [
@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "EdwinLuijten\\Ekko\\": "src/"
+            "EdwinLuijten\\Ekko\\Broadcast\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "EdwinLuijten\\Ekko\\Test\\": "tests/src/"
+            "EdwinLuijten\\Ekko\\Broadcast\\Test\\": "tests/src/"
         }
     },
 	"suggest": {

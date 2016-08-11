@@ -1,8 +1,8 @@
 <?php
 
-namespace EdwinLuijten\Ekko;
+namespace EdwinLuijten\Ekko\Broadcast;
 
-use EdwinLuijten\Ekko\Broadcasters\BroadcasterInterface;
+use EdwinLuijten\Ekko\Broadcast\Broadcasters\BroadcasterInterface;
 
 class BroadcastManager
 {
