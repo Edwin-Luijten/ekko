@@ -1,6 +1,6 @@
 <?php
 
-namespace EdwinLuijten\Ekko\Broadcast\Test;
+namespace EdwinLuijten\Ekko\Broadcast\Tests;
 
 use Monolog\Handler\StreamHandler;
 

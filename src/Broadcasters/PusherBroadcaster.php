@@ -2,6 +2,8 @@
 
 namespace EdwinLuijten\Ekko\Broadcast\Broadcasters;
 
+use EdwinLuijten\Ekko\Broadcast\Identity;
+use EdwinLuijten\Ekko\Broadcast\StrUtil;
 use Pusher;
 
 class PusherBroadcaster extends AbstractBroadcaster implements BroadcasterInterface
@@ -23,33 +25,33 @@ class PusherBroadcaster extends AbstractBroadcaster implements BroadcasterInterf
     /**
      * @param Identity $identity
      * @return mixed
-     * @throws \HttpException
+     * @throws \Exception
      */
     public function auth(Identity $identity)
     {
-        if (mb_strpos('private-', $identity->channel) || mb_strpos('presence-',
-                $identity->channel) && !empty($identity->identifier)
-        ) {
-            throw new \HttpException('Unauthorized', 403);
+        if (StrUtil::startsWith($identity->channel, ['private-', 'presence-']) && empty($identity->identifier)) {
+            throw new \Exception('Unauthorized', 403);
         }
 
-        return parent::verifyThatIdentityCanAccessChannel($identity,
-            str_replace(['private-', 'presence-'], '', $identity->channel));
+        return parent::verifyThatIdentityCanAccessChannel(
+            $identity,
+            str_replace(['private-', 'presence-'], '', $identity->channel)
+        );
     }
 
     /**
      * @param Identity $identity
      * @param $response
-     * @return string
+     * @return string signature
      */
     public function validAuthenticationResponse(Identity $identity, $response)
     {
-        if (mb_strpos('private', $identity->channel)) {
-            return $this->pusher->socket_auth($identity->channel, $identity->sockerId);
+        if (StrUtil::startsWith($identity->channel, 'private')) {
+            return $this->pusher->socket_auth($identity->channel, $identity->socketId);
         } else {
             return $this->pusher->presence_auth(
                 $identity->channel,
-                $identity->sockerId,
+                $identity->socketId,
                 $identity->identifier,
                 $response
             );

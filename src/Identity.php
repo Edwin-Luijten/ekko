@@ -1,6 +1,6 @@
 <?php
 
-namespace EdwinLuijten\Ekko\Broadcast\Broadcasters;
+namespace EdwinLuijten\Ekko\Broadcast;
 
 class Identity
 {
@@ -8,5 +8,7 @@ class Identity
 
     public $channel;
 
-    public $sockerId;
+    public $socketId;
+
+    public $user;
 }

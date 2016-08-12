@@ -28,7 +28,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "EdwinLuijten\\Ekko\\Broadcast\\Test\\": "tests/src/"
+            "EdwinLuijten\\Ekko\\Broadcast\\Tests\\": "tests/src/"
         }
     },
 	"suggest": {

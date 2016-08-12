@@ -1,6 +1,6 @@
 <?php
 
-namespace EdwinLuijten\Ekko\Broadcast\Test;
+namespace EdwinLuijten\Ekko\Broadcast\Tests;
 
 use EdwinLuijten\Ekko\Broadcast\Broadcasters\BroadcasterInterface;
 use EdwinLuijten\Ekko\Broadcast\Broadcasters\LogBroadcaster;

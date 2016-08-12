@@ -2,6 +2,8 @@
 
 namespace EdwinLuijten\Ekko\Broadcast\Broadcasters;
 
+use EdwinLuijten\Ekko\Broadcast\Identity;
+use EdwinLuijten\Ekko\Broadcast\StrUtil;
 use Predis\ClientInterface;
 
 class RedisBroadcaster extends AbstractBroadcaster implements BroadcasterInterface
@@ -23,14 +25,12 @@ class RedisBroadcaster extends AbstractBroadcaster implements BroadcasterInterfa
     /**
      * @param Identity $identity
      * @return mixed
-     * @throws \HttpException
+     * @throws \Exception
      */
     public function auth(Identity $identity)
     {
-        if (mb_strpos('private-', $identity->channel) || mb_strpos('presence-',
-                $identity->channel) && !empty($identity->identifier)
-        ) {
-            throw new \HttpException('Unauthorized', 403);
+        if (StrUtil::startsWith($identity->channel, ['private-', 'presence-']) && empty($identity->identifier)) {
+            throw new \Exception('Unauthorized', 403);
         }
 
         return parent::verifyThatIdentityCanAccessChannel($identity,

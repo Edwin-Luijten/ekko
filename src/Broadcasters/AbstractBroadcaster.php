@@ -2,6 +2,9 @@
 
 namespace EdwinLuijten\Ekko\Broadcast\Broadcasters;
 
+use EdwinLuijten\Ekko\Broadcast\Identity;
+use EdwinLuijten\Ekko\Broadcast\StrUtil;
+
 abstract class AbstractBroadcaster
 {
     /**
@@ -25,13 +28,12 @@ abstract class AbstractBroadcaster
      * @param Identity $identity
      * @param string $channel
      * @return mixed
-     * @throws \HttpException
+     * @throws \Exception
      */
     protected function verifyThatIdentityCanAccessChannel(Identity $identity, $channel)
     {
         foreach ($this->channels as $key => $callback) {
-
-            if (!$key === $channel) {
+            if (!StrUtil::is($key, $channel)) {
                 continue;
             }
 
@@ -42,7 +44,7 @@ abstract class AbstractBroadcaster
             }
         }
 
-        throw new \HttpException('Unauthorized', 403);
+        throw new \Exception('Unauthorized', 403);
     }
 
     /**
@@ -52,7 +54,8 @@ abstract class AbstractBroadcaster
      */
     protected function getAuthenticationParameters($key, $channel)
     {
-        if (mb_strpos($key, '*') === false) {
+
+        if (!StrUtil::contains($key, '*')) {
             return [];
         }
 
