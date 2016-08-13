@@ -91,5 +91,4 @@ class StrUtil
     {
         return mb_strlen($value);
     }
-
 }
