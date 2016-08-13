@@ -80,7 +80,16 @@ class StrUtil
         // pattern such as "library/*", making any string check convenient.
         $pattern = str_replace('\*', '.*', $pattern);
 
-        return (bool) preg_match('#^'.$pattern.'\z#u', $value);
+        return (bool)preg_match('#^' . $pattern . '\z#u', $value);
+    }
+
+    /**
+     * @param $value
+     * @return int
+     */
+    public static function length($value)
+    {
+        return mb_strlen($value);
     }
 
 }
