@@ -33,8 +33,10 @@ class RedisBroadcaster extends AbstractBroadcaster implements BroadcasterInterfa
             throw new \Exception('Unauthorized', 403);
         }
 
-        return parent::verifyThatIdentityCanAccessChannel($identity,
-            str_replace(['private-', 'presence-'], '', $identity->channel));
+        return parent::verifyThatIdentityCanAccessChannel(
+            $identity,
+            str_replace(['private-', 'presence-'], '', $identity->channel)
+        );
     }
 
     /**
@@ -48,12 +50,14 @@ class RedisBroadcaster extends AbstractBroadcaster implements BroadcasterInterfa
             return json_encode($response);
         }
 
-        return json_encode([
-            'channel_data' => [
-                'identifier' => $identity->identifier,
-                'identity'   => $response,
+        return json_encode(
+            [
+                'channel_data' => [
+                    'identifier' => $identity->identifier,
+                    'identity'   => $response,
+                ]
             ]
-        ]);
+        );
     }
 
     /**
