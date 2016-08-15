@@ -51,7 +51,7 @@ class Stubs
      * @param $channel
      * @return Channel|PresenceChannel|PrivateChannel
      */
-    public function getChannel($type, $channel)
+    public static function getChannel($type, $channel)
     {
         switch ($type) {
             case ('private'):
